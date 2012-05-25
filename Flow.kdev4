@@ -1,0 +1,4 @@
+[Project]
+Name=Flow
+Manager=KDevCMakeManager
+VersionControl=kdevgit
