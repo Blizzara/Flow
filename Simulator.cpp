@@ -36,12 +36,12 @@
 #include <algorithm> // needed for std::copy
 
 #define SIZE ((m_width)*(m_height))
-#define CALLOC(x) {(x) = (float*)calloc(SIZE,sizeof(float)); assert((x));}
+#define CALLOC(x) {(x) = (Array1Df)calloc(SIZE,sizeof(float)); assert((x));}
 #define FREE(x) { free((x)); } 
 #define CLEAR(x) { memset((x), 0,sizeof(float)*SIZE);}
 
 
-#define SWAP(x,y) {float* tmp = (x); (x) = (y); (y) = tmp;}
+#define SWAP(x,y) {Array1Df tmp = (x); (x) = (y); (y) = tmp;}
 
 Simulator::Simulator()
 {
@@ -110,7 +110,7 @@ Simulator::~Simulator()
   FREE(m_force_v)  
 }
 
-void Simulator::SetBounds(float b, float* d)
+void Simulator::SetBounds(float b, Array1Df d)
 {
 
   for(int i = 1; i < m_width; ++i)
@@ -131,7 +131,7 @@ void Simulator::SetBounds(float b, float* d)
   d[IX(m_width-1,m_height-1)] = 0.5*(d[IX(m_width-2,m_height-1)] + d[IX(m_width-1,m_height-2)]);
 }
 
-void Simulator::Project(float *u, float *v, float *p, float *div)
+void Simulator::Project(Array1Df u, Array1Df v, Array1Df p, Array1Df div)
 {
   int i, j, k;
   for ( i=1 ; i< m_width -1; i++ ) {
@@ -159,14 +159,14 @@ void Simulator::Project(float *u, float *v, float *p, float *div)
 }
 
 
-void Simulator::ApplySources(float dt, float *d, float *source)
+void Simulator::ApplySources(float dt, Array1Df d, Array1Df source)
 {
   for (int i = 0; i < m_width; ++i)
     for(int j = 0; j < m_height; ++j)
       d[IX(i,j)] += source[IX(i,j)] * dt;
 }
 
-void Simulator::Diffuse(float b, float dt, float diff, float *d, float *d_t)
+void Simulator::Diffuse(float b, float dt, float diff, Array1Df d, Array1Df d_t)
 {
   float a = diff*dt*m_width*m_height;
   
@@ -179,7 +179,7 @@ void Simulator::Diffuse(float b, float dt, float diff, float *d, float *d_t)
   }
 }
 
-void Simulator::Advect(float b, float dt, float *d, float *d_t, float *u, float *v)
+void Simulator::Advect(float b, float dt, Array1Df d, Array1Df d_t, Array1Df u, Array1Df v)
 {
   int i0,j0,i1,j1; // neighbour cells
   

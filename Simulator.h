@@ -33,6 +33,8 @@
 
 #define IX(x,y) (((x)*(m_height))+(y))
 
+typedef float* Array1Df;
+
 class Simulator
 {
 public:
@@ -66,29 +68,29 @@ private:
   Simulator(Simulator& other);
   virtual Simulator& operator=(Simulator& other);
   
-  void ApplySources(float dt, float* d, float* source);
-  void Diffuse(float b, float dt, float diff, float* d, float *d_t);
-  void Advect(float b, float dt, float* d, float* d_t, float* u, float* v);
+  void ApplySources(float dt, Array1Df d, Array1Df source);
+  void Diffuse(float b, float dt, float diff, Array1Df d, Array1Df d_t);
+  void Advect(float b, float dt, Array1Df d, Array1Df d_t, Array1Df u, Array1Df v);
   void DensityStep(float dt);
   void VelocityStep(float dt);
   
-  void SetBounds(float b, float* d);
-  void Project(float *u, float *v, float *p, float *div);
+  void SetBounds(float b, Array1Df d);
+  void Project(Array1Df u, Array1Df v, Array1Df p, Array1Df div);
   
   //World m_world;
   
   int m_width;
   int m_height;
   
-  float* m_u;
-  float* m_v;
-  float* m_u_t;
-  float* m_v_t;
-  float* m_d;
-  float* m_d_t;
-  float* m_source;
-  float* m_force_u;
-  float* m_force_v;
+  Array1Df m_u;
+  Array1Df m_v;
+  Array1Df m_u_t;
+  Array1Df m_v_t;
+  Array1Df m_d;
+  Array1Df m_d_t;
+  Array1Df m_source;
+  Array1Df m_force_u;
+  Array1Df m_force_v;
   float m_diff;
   float m_visc;
   float m_dt;
