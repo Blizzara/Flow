@@ -25,7 +25,6 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
@@ -33,7 +32,10 @@
 
 #define IX(x,y) (((x)*(m_height))+(y))
 
-typedef float* Array1Df;
+//typedef float* Array1Df;
+
+#include <vector>
+typedef std::vector<float> Array1Df;
 
 class Simulator
 {
@@ -68,14 +70,14 @@ private:
   Simulator(Simulator& other);
   virtual Simulator& operator=(Simulator& other);
   
-  void ApplySources(float dt, Array1Df d, Array1Df source);
-  void Diffuse(float b, float dt, float diff, Array1Df d, Array1Df d_t);
-  void Advect(float b, float dt, Array1Df d, Array1Df d_t, Array1Df u, Array1Df v);
+  void ApplySources(float dt, Array1Df &d, Array1Df &source);
+  void Diffuse(float b, float dt, float diff, Array1Df& d, Array1Df& d_t);
+  void Advect(float b, float dt, Array1Df& d, Array1Df& d_t, Array1Df& u, Array1Df& v);
   void DensityStep(float dt);
   void VelocityStep(float dt);
   
-  void SetBounds(float b, Array1Df d);
-  void Project(Array1Df u, Array1Df v, Array1Df p, Array1Df div);
+  void SetBounds(float b, Array1Df &d);
+  void Project(Array1Df &u, Array1Df &v, Array1Df &p, Array1Df &div);
   
   //World m_world;
   

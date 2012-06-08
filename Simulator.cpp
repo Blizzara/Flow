@@ -36,12 +36,16 @@
 #include <algorithm> // needed for std::copy
 
 #define SIZE ((m_width)*(m_height))
-#define CALLOC(x) {(x) = (Array1Df)calloc(SIZE,sizeof(float)); assert((x));}
-#define FREE(x) { free((x)); } 
-#define CLEAR(x) { memset((x), 0,sizeof(float)*SIZE);}
 
+//#define CALLOC(x) {(x) = (Array1Df)calloc(SIZE,sizeof(float)); assert((x));}
+//#define FREE(x) { free((x)); } 
+//#define CLEAR(x) { memset((x), 0,sizeof(float)*SIZE);}
+//#define SWAP(x,y) {Array1Df tmp = (x); (x) = (y); (y) = tmp;}
 
-#define SWAP(x,y) {Array1Df tmp = (x); (x) = (y); (y) = tmp;}
+#define SWAP(x,y) { (x).swap((y));}
+#define CALLOC(x) {(x) = Array1Df(SIZE,0);}
+#define FREE(x) { } 
+#define CLEAR(x) { std::fill((x).begin(), (x).end(), 0);}
 
 Simulator::Simulator()
 {
@@ -110,7 +114,7 @@ Simulator::~Simulator()
   FREE(m_force_v)  
 }
 
-void Simulator::SetBounds(float b, Array1Df d)
+void Simulator::SetBounds(float b, Array1Df &d)
 {
 
   for(int i = 1; i < m_width; ++i)
@@ -131,7 +135,7 @@ void Simulator::SetBounds(float b, Array1Df d)
   d[IX(m_width-1,m_height-1)] = 0.5*(d[IX(m_width-2,m_height-1)] + d[IX(m_width-1,m_height-2)]);
 }
 
-void Simulator::Project(Array1Df u, Array1Df v, Array1Df p, Array1Df div)
+void Simulator::Project(Array1Df &u, Array1Df &v, Array1Df &p, Array1Df &div)
 {
   int i, j, k;
   for ( i=1 ; i< m_width -1; i++ ) {
@@ -159,27 +163,39 @@ void Simulator::Project(Array1Df u, Array1Df v, Array1Df p, Array1Df div)
 }
 
 
-void Simulator::ApplySources(float dt, Array1Df d, Array1Df source)
+void Simulator::ApplySources(float dt, Array1Df &d, Array1Df &source)
 {
+  
   for (int i = 0; i < m_width; ++i)
+  {
     for(int j = 0; j < m_height; ++j)
+    {
       d[IX(i,j)] += source[IX(i,j)] * dt;
+      //std::cout << i << "x" << j << ": " << source[IX(i,j)] * dt << std::endl;
+    }
+  }
 }
 
-void Simulator::Diffuse(float b, float dt, float diff, Array1Df d, Array1Df d_t)
+void Simulator::Diffuse(float b, float dt, float diff, Array1Df &d, Array1Df &d_t)
 {
   float a = diff*dt*m_width*m_height;
   
   for (int k = 0; k < m_k; ++k)
   {
     for(int i = 1; i < m_width-1; ++i)
+    {
       for(int j = 1; j < m_height-1; ++j)
-	d[IX(i,j)] = (d_t[IX(i,j)] + a*(d[IX(i-1, j)] + d[IX(i+1, j)] + d[IX(i, j-1)] + d[IX(i, j+1)]))/(1+4*a);   
+      {
+	d[IX(i,j)] = (d_t[IX(i,j)] + a*(d[IX(i-1, j)] + d[IX(i+1, j)] + d[IX(i, j-1)] + d[IX(i, j+1)]))/(1+4*a);  
+      }
+    }
+    
     SetBounds(b, d);
   }
+  
 }
 
-void Simulator::Advect(float b, float dt, Array1Df d, Array1Df d_t, Array1Df u, Array1Df v)
+void Simulator::Advect(float b, float dt, Array1Df &d, Array1Df &d_t, Array1Df &u, Array1Df &v)
 {
   int i0,j0,i1,j1; // neighbour cells
   
@@ -214,11 +230,12 @@ void Simulator::Step(float dt)
   if (dt < 0)
     dt = m_dt;
   
-  std::copy(m_force_u, m_force_u+SIZE, m_u_t);
-  std::copy(m_force_v, m_force_v+SIZE, m_v_t);
+  std::copy(m_force_u.begin(), m_force_u.end(), m_u_t.begin());
+  std::copy(m_force_v.begin(), m_force_v.end(), m_v_t.begin());
   
   DensityStep(dt);
   VelocityStep(dt);
+  
 }
 
 
