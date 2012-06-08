@@ -77,6 +77,7 @@ private:
   QTimer* m_timer;
   
   Simulator m_sim;
+  QWidget* m_parent;
   
 public slots:
   void changeDiffusion(int a_new);
@@ -97,7 +98,14 @@ public slots:
   
   void selectRed(int a_new);
   void selectGreen(int a_new);
-  void selectBlue(int a_new);  
+  void selectBlue(int a_new); 
+
+signals:
+  void tellX(int x);
+  void tellY(int y);
+  void tellDens(double dens);
+  void tellUForce(double uforce);
+  
 };
 
 //#include "FlowGLWin.moc"

@@ -35,7 +35,7 @@
 
 #include <QMouseEvent>
 
-FlowGLWin::FlowGLWin(QWidget* parent) : m_sim()
+FlowGLWin::FlowGLWin(QWidget* parent) : m_sim(), QGLWidget(parent)
 {
   m_sides_i = 3;
   m_radius_d	 = 1.0;
@@ -47,8 +47,14 @@ FlowGLWin::FlowGLWin(QWidget* parent) : m_sim()
   m_visible_components[1] = COMPONENT_SOURCE;
   m_visible_components[2] = COMPONENT_SUMFORCE;
   
+  
+  // Timer for running simulation
   m_timer = new QTimer(this);
   connect(m_timer, SIGNAL(timeout()), this, SLOT(step()));
+  
+  
+  // Mouse tracking needed to update pixel info
+  setMouseTracking(true);
 }
 
 
@@ -59,18 +65,54 @@ FlowGLWin::~FlowGLWin()
 
 void FlowGLWin::mouseMoveEvent(QMouseEvent* a_event)
 {
-  QPoint r_pos = QPoint((a_event->pos().x() * m_sim.getWidth() / m_screen_width), (800-a_event->pos().y())*m_sim.getHeight()/m_screen_height);
+  QPoint r_pos = QPoint((a_event->x() * m_sim.getWidth() / m_screen_width), (m_sim.getHeight() - a_event->y()*m_sim.getHeight()/m_screen_height));
 
-  float strength = 100000.0f;
-  switch (m_insert_mode){
-    case INSERT_MODE_SOURCE:
-      m_sim.setSource((int)r_pos.x(), (int)r_pos.y(), strength); break;
-    case INSERT_MODE_FORCE_U:
-      m_sim.setForceU((int)r_pos.x(), (int)r_pos.y(), strength); break;
-    case INSERT_MODE_FORCE_V:
-      m_sim.setForceV((int)r_pos.x(), (int)r_pos.y(), strength); break;
+  int x = r_pos.x(), y=r_pos.y();
+  
+  float strength = 1.0f;
+//  std::cout <<  "MouseMoveeeeed" << std::endl;
+
+  if (a_event->buttons() > 0)
+  {
+//    std::cout << a_event->buttons() << std::endl;
+    if (a_event->buttons() & Qt::LeftButton)
+    {
+//      std::cout << "LEFT" << std::endl;
+      strength = 1.0f;
+    }
+    else if (a_event->buttons() & Qt::RightButton)
+    {
+//      std::cout << "RIGHT" << std::endl;
+      strength = -1.0f;
+    }
+    else if (a_event->buttons() & Qt::MiddleButton)
+    {
+      strength = 0.0f;
+    }
+  
+
+    switch (m_insert_mode){
+      case INSERT_MODE_SOURCE:
+	m_sim.setSource(x, y, strength); break;
+      case INSERT_MODE_FORCE_U:
+	m_sim.setForceU(x, y, strength); break;
+      case INSERT_MODE_FORCE_V:
+	m_sim.setForceV(x, y, strength); break;
+    }
+    updateGL();
+
   }
-  updateGL();
+  else
+  {
+    std::cout << "No buttons" << std::endl;
+  }
+  
+  // Update pixel info 
+  emit tellX(x);
+  emit tellY(y);
+  emit tellDens(m_sim.getDensity(x,y));
+  emit tellUForce(m_sim.getForceU(x,y));
+  
 }
 
 
@@ -100,8 +142,13 @@ void FlowGLWin::paintGL()
       float g = valueByComponentEnum(i,j,m_visible_components[1]);
       float b = valueByComponentEnum(i,j,m_visible_components[2]);
 
+      r = r > 1 ? 1 : r;
+      g = g > 1 ? 1 : g;
+      b = b > 1 ? 1 : b;
+      
+      
       //if (r+g+b > 0.1f) std::cout << r << " " << g << " " << b << std::endl;
-      glColor3f(r, g, b);
+      glColor3f(r*255, g*255, b*255);
       glBegin(GL_POINTS);
 	glVertex2i(i,j);
       glEnd();

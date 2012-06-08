@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
+    <width>948</width>
     <height>613</height>
    </rect>
   </property>
@@ -275,6 +275,12 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QGroupBox" name="select_insert">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="title">
              <string>Insert mode</string>
             </property>
@@ -308,6 +314,12 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="title">
              <string>Components to view</string>
             </property>
@@ -478,6 +490,12 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupbox_time">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="title">
            <string>Time</string>
           </property>
@@ -508,63 +526,125 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupbox_pixelinfo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="title">
            <string>Pixel info</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="label_pixinfo_x">
              <property name="text">
               <string>X</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="label_pixinfo_x_val">
              <property name="text">
-              <string>TextLabel</string>
+              <string>0</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="label_pixinfo_y">
              <property name="text">
               <string>Y</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="label_pixinfo_y_val">
              <property name="text">
-              <string>TextLabel</string>
+              <string>0</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="label_pixinfo_dens">
              <property name="text">
               <string>Density</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLabel" name="label_14">
+            <widget class="QLabel" name="label_pixinfo_dens_val">
              <property name="text">
-              <string>TextLabel</string>
+              <string>0</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_15">
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_pixinfo_ufor">
              <property name="text">
               <string>U-force</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="label_16">
+           <item row="4" column="1">
+            <widget class="QLabel" name="label_pixinfo_ufor_val">
              <property name="text">
-              <string>TextLabel</string>
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_pixinfo_vfor">
+             <property name="text">
+              <string>V-force</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_pixinfo_vfor_val">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_pixinfo_vvel">
+             <property name="text">
+              <string>V-vel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="label_pixinfo_vvel_val">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_pixinfo_uvel">
+             <property name="text">
+              <string>U-vel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLabel" name="label_pixinfo_uvel_val">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_pixinfo_source">
+             <property name="text">
+              <string>Source</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_pixinfo_source_val">
+             <property name="text">
+              <string>0</string>
              </property>
             </widget>
            </item>
@@ -604,7 +684,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>941</width>
+     <width>948</width>
      <height>25</height>
     </rect>
    </property>
@@ -630,6 +710,14 @@
    <header>FlowGLWin.h</header>
    <container>1</container>
    <slots>
+    <signal>tellX(int)</signal>
+    <signal>tellY(int)</signal>
+    <signal>tellDens(double)</signal>
+    <signal>tellUForce(double)</signal>
+    <signal>tellSource(double)</signal>
+    <signal>tellVForce(double)</signal>
+    <signal>tellUVel(double)</signal>
+    <signal>tellVVel(double)</signal>
     <slot>step()</slot>
     <slot>selectInsertMode_source()</slot>
     <slot>selectInsertMode_force_u()</slot>
@@ -722,11 +810,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>214</x>
-     <y>74</y>
+     <y>93</y>
     </hint>
     <hint type="destinationlabel">
      <x>234</x>
-     <y>196</y>
+     <y>272</y>
     </hint>
    </hints>
   </connection>
@@ -737,12 +825,12 @@
    <slot>selectInsertMode_force_u()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>308</x>
-     <y>74</y>
+     <x>316</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>423</x>
-     <y>205</y>
+     <y>281</y>
     </hint>
    </hints>
   </connection>
@@ -753,12 +841,12 @@
    <slot>selectInsertMode_force_v()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>455</x>
-     <y>79</y>
+     <x>399</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>704</x>
-     <y>207</y>
+     <y>283</y>
     </hint>
    </hints>
   </connection>
@@ -790,7 +878,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>150</x>
-     <y>223</y>
+     <y>299</y>
     </hint>
    </hints>
   </connection>
@@ -898,11 +986,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>253</x>
-     <y>155</y>
+     <y>212</y>
     </hint>
     <hint type="destinationlabel">
      <x>265</x>
-     <y>210</y>
+     <y>286</y>
     </hint>
    </hints>
   </connection>
@@ -913,12 +1001,12 @@
    <slot>selectBlue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>490</x>
-     <y>152</y>
+     <x>633</x>
+     <y>217</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
-     <y>209</y>
+     <y>285</y>
     </hint>
    </hints>
   </connection>
@@ -929,12 +1017,12 @@
    <slot>selectGreen(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>358</x>
-     <y>156</y>
+     <x>474</x>
+     <y>217</y>
     </hint>
     <hint type="destinationlabel">
      <x>355</x>
-     <y>193</y>
+     <y>269</y>
     </hint>
    </hints>
   </connection>
@@ -945,12 +1033,12 @@
    <slot>startSim()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>619</x>
-     <y>118</y>
+     <x>751</x>
+     <y>205</y>
     </hint>
     <hint type="destinationlabel">
      <x>583</x>
-     <y>214</y>
+     <y>290</y>
     </hint>
    </hints>
   </connection>
@@ -961,12 +1049,12 @@
    <slot>pauseSim()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>666</x>
-     <y>150</y>
+     <x>751</x>
+     <y>238</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
-     <y>202</y>
+     <y>278</y>
     </hint>
    </hints>
   </connection>
@@ -1031,6 +1119,134 @@
     <hint type="destinationlabel">
      <x>110</x>
      <y>461</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellX(int)</signal>
+   <receiver>label_pixinfo_x_val</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>828</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>895</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellY(int)</signal>
+   <receiver>label_pixinfo_y_val</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>876</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>881</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellDens(double)</signal>
+   <receiver>label_pixinfo_dens_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>902</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>896</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellUForce(double)</signal>
+   <receiver>label_pixinfo_ufor_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>924</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>898</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellSource(double)</signal>
+   <receiver>label_pixinfo_source_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>851</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>858</x>
+     <y>140</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellVForce(double)</signal>
+   <receiver>label_pixinfo_vfor_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>798</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>853</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellUVel(double)</signal>
+   <receiver>label_pixinfo_vvel_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>911</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>872</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>GL_window</sender>
+   <signal>tellVVel(double)</signal>
+   <receiver>label_pixinfo_uvel_val</receiver>
+   <slot>setNum(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>921</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>897</x>
+     <y>232</y>
     </hint>
    </hints>
   </connection>
